@@ -11,9 +11,9 @@
             <td><div>{{getFormattedDate(match.timeStamp)}}</div>
                 <div>{{getFormattedTime(match.timeStamp)}}</div>
             </td>
-            <td>{{match.home}}</td>
+            <td><img src={{match.imgSrcHome}}>{{match.home}}</td>
             <td>-</td>
-            <td>{{match.away}}</td>
+            <td>{{match.away}}<img src={{match.imgSrcAway}}></td>
             <td>{{match.goalsHome}} : {{match.goalsAway}}</td>
         </tr>
     </tbody>
