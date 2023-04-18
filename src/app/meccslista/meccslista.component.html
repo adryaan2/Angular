@@ -1,0 +1,20 @@
+<table class="table table-dark table-hover">
+    <thead>
+        <tr>
+            <th>Időpont</th>
+            <th colspan="3">Csapatok</th>
+            <th>Eredmény</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let match of lastMatchList">
+            <td><div>{{getFormattedDate(match.timeStamp)}}</div>
+                <div>{{getFormattedTime(match.timeStamp)}}</div>
+            </td>
+            <td>{{match.home}}</td>
+            <td>-</td>
+            <td>{{match.away}}</td>
+            <td>{{match.goalsHome}} : {{match.goalsAway}}</td>
+        </tr>
+    </tbody>
+</table>
