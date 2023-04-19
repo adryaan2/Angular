@@ -1,3 +1,5 @@
+import { Bet } from "./bet";
+
 export class Match {
     fixtureId?: number = -1;
     timeStamp: number = -1;
@@ -7,4 +9,7 @@ export class Match {
     goalsAway?: number = -1;
     imgSrcHome?: string;
     imgSrcAway?: string;
+    unibet?: Bet;
+    bet365?: Bet;
+    bwin?: Bet;
 }

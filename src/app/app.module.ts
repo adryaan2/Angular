@@ -6,12 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MeccslistaComponent } from './meccslista/meccslista.component';
+import { FogadasComponent } from './fogadas/fogadas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    MeccslistaComponent
+    MeccslistaComponent,
+    FogadasComponent
   ],
   imports: [
     BrowserModule,
