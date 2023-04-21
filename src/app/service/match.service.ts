@@ -3,6 +3,7 @@ import { Match } from '../model/match';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Convert, FixturesResponse } from '../model/FixturesResponse';
 import { Observable } from 'rxjs';
+import { OddsResponse } from '../model/OddsResponse';
 @Injectable({
   providedIn: 'root'
 })
@@ -42,6 +43,19 @@ export class MatchService {
       params: queryParams
     };
     return this.http.get<FixturesResponse>(this.apiBaseUrl+"fixtures", requestOptions);
+  }
+
+  getOdds(season: number): Observable<OddsResponse>{
+    let queryParams = new HttpParams();
+    queryParams = queryParams.append("league",271);
+    queryParams = queryParams.append("season",season);
+    queryParams = queryParams.append("bet",1);
+
+    const requestOptions = {
+      headers: this.headerObj,
+      params: queryParams
+    };
+    return this.http.get<OddsResponse>(this.apiBaseUrl+"odds", requestOptions);
   }
 
 }

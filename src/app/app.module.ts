@@ -7,13 +7,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
 import { MeccslistaComponent } from './meccslista/meccslista.component';
 import { FogadasComponent } from './fogadas/fogadas.component';
+import { TabellaComponent } from './tabella/tabella.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     MeccslistaComponent,
-    FogadasComponent
+    FogadasComponent,
+    TabellaComponent
   ],
   imports: [
     BrowserModule,
