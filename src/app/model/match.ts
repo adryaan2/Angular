@@ -1,7 +1,7 @@
 import { Bet } from "./bet";
 
 export class Match {
-    fixtureId?: number = -1;
+    fixtureId: number = -1;
     timeStamp: number = -1;
     home: string = "NO_HOME";
     away: string = "NO_AWAY";

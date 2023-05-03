@@ -2,3 +2,25 @@
 .center{
     text-align: center;
 }
+.container{
+    @media screen and (max-width:650px){
+        padding:0
+    }
+}
+
+.centerContainer{
+    margin: 0 auto;
+}
+
+img{
+    max-width: 45px;
+    max-height: 45px;
+}
+.myTable{
+    td, th{
+        vertical-align:middle
+    }
+    .center{
+        text-align: center;
+    }
+}

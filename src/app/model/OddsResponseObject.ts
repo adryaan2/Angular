@@ -1,12 +1,12 @@
 //a szövegként megadott törtszám átalakítása:
 // let tort = parseFloat('123.45');
-export interface OddsResponse {
+export interface OddsResponseObject {
     get:        string;
     parameters: Parameters;
     errors:     any[];
     results:    number;
     paging:     Paging;
-    response:   Response[];
+    response:   OddsResponse[];
 }
 
 export interface Paging {
@@ -19,7 +19,7 @@ export interface Parameters {
     season: string;
 }
 
-export interface Response {
+export interface OddsResponse {
     league:     League;
     fixture:    Fixture;
     update:     string;
@@ -39,7 +39,7 @@ export interface Bet {
 }
 
 export interface ValueElement {
-    value: number | string;
+    value:  string;
     odd:   string;
 }
 

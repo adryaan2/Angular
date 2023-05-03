@@ -1,7 +1,7 @@
 export interface Bet{
-    home: number,
-    draw: number,
-    away: number,
-    bookmakerId?: number,
-    bookmakerName?: string
+    home: string,
+    draw: string,
+    away: string,
+    bookmakerId: number,
+    bookmakerName: string
 }

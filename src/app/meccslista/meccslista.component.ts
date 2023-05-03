@@ -10,9 +10,17 @@ import { Convert, FixturesResponse } from "../model/FixturesResponse";
   styleUrls: ['./meccslista.component.scss']
 })
 export class MeccslistaComponent {
+  matchService = inject(MatchService); //csak akkor hozza létre ha még sehol senki se inject()-elte
+
+  nextMatchList: Match[] = Array();
+  lastMatchList: Match[] = Array();
+
   constructor(){
-    this.matchService.getLastMatches(20).subscribe(
+    //this.lastMatchList = this.matchService.getLastMatchesArray(20);
+    this.matchService.getNextMatches(20).subscribe(
       data=>{
+        //let jsonPipe: JsonPipe = new JsonPipe(); //debug konzolhoz
+        this.lastMatchList = [];
         for(var aktMeccs of data.response){
           let ujMeccs: Match = new Match();
           ujMeccs.fixtureId=aktMeccs.fixture?.id;
@@ -24,15 +32,15 @@ export class MeccslistaComponent {
           ujMeccs.imgSrcHome=aktMeccs.teams?.home?.logo;
           ujMeccs.imgSrcAway=aktMeccs.teams?.away?.logo;
           this.lastMatchList.push(ujMeccs);
-          console.log(ujMeccs);
+          //console.log(jsonPipe.transform(ujMeccs));
         }
+        console.log(this.lastMatchList.length);
       }
     )
   }
 
-  matchService = inject(MatchService); //csak akkor hozza létre ha még sehol senki se inject()-elte
-  nextMatchList: Match[] = Array();
-  lastMatchList: Match[] = Array();
+  
+  
 
   getFormattedDate(timeStamp: number): string{
     return new Intl.DateTimeFormat("hu-HU").format(timeStamp*1000);
