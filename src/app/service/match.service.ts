@@ -92,12 +92,12 @@ export class MatchService {
   }
 
   
-  getOdds(season: number): Observable<OddsResponseObject>{
+  getOdds(season: number, page: number): Observable<OddsResponseObject>{
     let queryParams = new HttpParams();
     queryParams = queryParams.append("league",271);
     queryParams = queryParams.append("season",season);
     queryParams = queryParams.append("bet",1);
-
+    queryParams = queryParams.append("page",page);
     const requestOptions = {
       headers: this.headerObj,
       params: queryParams
