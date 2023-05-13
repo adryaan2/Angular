@@ -22,6 +22,8 @@ export class FogadasComponent {
 
   combined: Observable<any> = combineLatest([
     this.matchService.getOdds(2022,1),
+    // 2. oldal. if-ekkel ellenőrizni, hogy van-e normális tartalma? (pl errors tömb)
+    // this.matchService.getOdds(2022,2),
     this.matchService.getNextMatches(20),
   ]);
 
