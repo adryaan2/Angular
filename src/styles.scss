@@ -23,4 +23,10 @@ img{
     .center{
         text-align: center;
     }
+    .fit{
+        td,th{
+            width: fit-content;
+            padding: 4;
+        }
+    }
 }

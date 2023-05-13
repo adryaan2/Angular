@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { MatchService } from '../service/match.service';
 import { Match } from '../model/match';
-import { Convert, FixturesResponse } from "../model/FixturesResponse";
+import { KeresesService } from '../kereses.service';
 //import * as FixturesResponse from '../model/FixturesResponse'
 
 @Component({
@@ -11,11 +11,13 @@ import { Convert, FixturesResponse } from "../model/FixturesResponse";
 })
 export class MeccslistaComponent {
   matchService = inject(MatchService); //csak akkor hozza létre ha még sehol senki se inject()-elte
-
+  keresService = inject(KeresesService);
   nextMatchList: Match[] = Array();
-  lastMatchList: Match[] = Array();
+  lastMatchList: Match[] = Array(); //összeset tárolja amit lekértünk
+  filteredLastMatchList: Match[] = Array(); //ezt írjuk ki
 
   constructor(){
+    this.keresService.searchEvent.subscribe(str=>this.searchFilter(str))
     //this.lastMatchList = this.matchService.getLastMatchesArray(20);
     this.matchService.getNextMatches(20).subscribe(
       data=>{
@@ -35,13 +37,18 @@ export class MeccslistaComponent {
           //console.log(jsonPipe.transform(ujMeccs));
         }
         console.log(this.lastMatchList.length);
+        // filteredLastMatchList-be leklónozom a lastMatchList-et
+        this.filteredLastMatchList=Object.assign([], this.lastMatchList);
       }
     )
   }
 
+  searchFilter(str: string):void{
+    str=str.toLowerCase();
+    this.filteredLastMatchList=this.lastMatchList.filter(x=>(x.home.toLowerCase().includes(str)) || (x.away.toLowerCase().includes(str)))
+  }
   
   
-
   getFormattedDate(timeStamp: number): string{
     return new Intl.DateTimeFormat("hu-HU").format(timeStamp*1000);
   }

@@ -6,6 +6,7 @@ import { Bet } from '../model/bet';
 import { Observable, combineLatest } from 'rxjs';
 import { Response } from '../model/FixturesResponse';
 import { JsonPipe } from '@angular/common';
+import { KeresesService } from '../kereses.service';
 
 @Component({
   selector: 'app-fogadas',
@@ -14,26 +15,35 @@ import { JsonPipe } from '@angular/common';
 })
 export class FogadasComponent {
   matchService = inject(MatchService);
+  keresService = inject(KeresesService);
 
-  matchesWithOdds: Match[] = Array();
+  matchesWithOdds: Match[] = Array(); //összes
+  filteredMatchesWithOdds: Match[] = Array(); //ezt íratom ki
   nextMatchList: Match[] = Array();
   oddsResponses: OddsResponse[]=Array(); //az API válasz egy nagy objektum, ezekbe szedem ki a kicsit értelmesebb részét
   fixturesResponses: Response[]=Array();
 
   combined: Observable<any> = combineLatest([
     this.matchService.getOdds(2022,1),
-    // 2. oldal. if-ekkel ellenőrizni, hogy van-e normális tartalma? (pl errors tömb)
-    // this.matchService.getOdds(2022,2),
     this.matchService.getNextMatches(20),
+    // 2. oldal. if-ekkel ellenőrizni, hogy van-e normális tartalma? (pl errors tömb)
+    this.matchService.getOdds(2022,2),
   ]);
 
   constructor(){
+    this.keresService.searchEvent.subscribe(str=>this.searchFilter(str))
+
     console.log('matchesWithOdds elemszáma: '+this.matchesWithOdds.length);
 
     this.combined.subscribe(
       list => {
         //console.log(list[0].response);
         this.oddsResponses = list[0].response;
+        // ha van több oldal, a 2. oldalt is felhasználjuk
+        if(list[0].paging.total>1)
+          list[2].response.forEach((element: OddsResponse) => {
+            this.oddsResponses.push(element);
+          });
         this.fixturesResponses = list[1].response;
         console.log('oddsResponses: '+ new JsonPipe().transform(this.oddsResponses));
         console.log('fixturesResponses: '+this.fixturesResponses.length);
@@ -140,9 +150,15 @@ export class FogadasComponent {
           }
         }
         this.matchesWithOdds=matchesWithOdds;
+        this.filteredMatchesWithOdds=matchesWithOdds;
         console.log('this.matchesWithOdds: '+this.matchesWithOdds.length);
       }
     );
+  }
+
+  searchFilter(str: string):void{
+    str=str.toLowerCase();
+    this.filteredMatchesWithOdds=this.matchesWithOdds.filter(x=>(x.home.toLowerCase().includes(str)) || (x.away.toLowerCase().includes(str)))
   }
 
   getFormattedDate(timeStamp: number): string{

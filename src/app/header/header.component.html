@@ -12,8 +12,8 @@
       </div>
     </div>
     <form class="d-flex" role="search">
-      <input class="form-control me-2" type="search" placeholder="Keress egy csapatra" aria-label="Search">
-      <button class="btn btn-primary" type="submit">Keresés</button>
+      <input name="str" [(ngModel)]="str" class="form-control me-2" type="search" placeholder="Keress egy csapatra" aria-label="Search">
+      <button (click)="keres(str)" class="btn btn-primary">Keresés</button>
     </form>
   </div>
 </nav>

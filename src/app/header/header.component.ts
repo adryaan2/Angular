@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { MatchService } from '../service/match.service';
+import { Component, inject } from '@angular/core';
+import { KeresesService } from '../kereses.service';
 
 @Component({
   selector: 'app-header',
@@ -8,8 +8,10 @@ import { MatchService } from '../service/match.service';
 })
 export class HeaderComponent {
 
-  constructor(private matchService: MatchService){}
-  keres(){
-    
+  str: string="";
+  keresService = inject(KeresesService);
+  constructor(){}
+  keres(str: string){
+    this.keresService.searchStr=str;
   }
 }

@@ -1,25 +1,45 @@
-<h2 class="center">Jövőbeli fogadások</h2>
+<h2 class="center">Jövőbeli meccsek fogadásai</h2>
 <table class="table table-dark table-hover centerContainer myTable">
     <thead>
         <tr>
-            <th>Időpont</th>
-            <th colspan="5" class="center">Csapatok</th>
-            <th colspan="3">Fogadóirodák</th>
+            <th rowspan="2">Időpont</th>
+            <th colspan="5" rowspan="2" class="center">Csapatok</th>
+            <th rowspan="2" class="center fit">Fogadóirodák</th>
+            <th colspan="3" class="center fit">Fogadások</th>
+        </tr>
+        <tr class="center fit">
+            <th>Hazai</th>
+            <th>Döntetlen</th>
+            <th>Vendég</th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let match of matchesWithOdds">
-            <td><div>{{getFormattedDate(match.timeStamp)}}</div>
+    <tbody *ngFor="let match of filteredMatchesWithOdds">
+        <tr>
+            <td rowspan="3"><div>{{getFormattedDate(match.timeStamp)}}</div>
                 <div>{{getFormattedTime(match.timeStamp)}}</div>
             </td>
-            <td><img src={{match.imgSrcHome}}></td>
-            <td>{{match.home}}</td>
-            <td>-</td>
-            <td>{{match.away}}</td>
-            <td><img src={{match.imgSrcAway}}></td>
-            <td>{{match.unibet?.bookmakerName}}</td>
+            <td rowspan="3"><img src={{match.imgSrcHome}}></td>
+            <td rowspan="3">{{match.home}}</td>
+            <td rowspan="3">-</td>
+            <td rowspan="3">{{match.away}}</td>
+            <td rowspan="3"><img src={{match.imgSrcAway}}></td>
+            <td class="center fit">{{match.unibet?.bookmakerName}}</td>
+            <td class="center fit">{{match.unibet?.home}}</td>
+            <td class="center fit">{{match.unibet?.draw}}</td>
+            <td class="center fit">{{match.unibet?.away}}</td>
+            
+        </tr>
+        <tr class="center fit">
             <td>{{match.bet365?.bookmakerName}}</td>
+            <td>{{match.bet365?.home}}</td>
+            <td>{{match.bet365?.draw}}</td>
+            <td>{{match.bet365?.away}}</td>
+        </tr>
+        <tr class="center fit">
             <td>{{match.bwin?.bookmakerName}}</td>
+            <td>{{match.bwin?.home}}</td>
+            <td>{{match.bwin?.draw}}</td>
+            <td>{{match.bwin?.away}}</td>
         </tr>
     </tbody>
 </table>

@@ -7,7 +7,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let match of lastMatchList">
+        <tr *ngFor="let match of filteredLastMatchList">
             <td><div>{{getFormattedDate(match.timeStamp)}}</div>
                 <div>{{getFormattedTime(match.timeStamp)}}</div>
             </td>
